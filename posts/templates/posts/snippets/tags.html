@@ -1,0 +1,13 @@
+<!-- Widget [Tags Cloud Widget]-->
+<div class="widget tags">
+    <header>
+        <h3 class="h6">Tags</h3>
+    </header>
+    <ul class="list-inline">
+        {% for tag in tags %}
+
+        <li class="list-inline-item"><a href="#" class="tag">#{{tag}}</a></li>
+
+        {% endfor %}
+    </ul>
+</div>

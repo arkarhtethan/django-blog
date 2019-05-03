@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <!-- Latest Posts -->
+        <main class="posts-listing col-lg-8">
+            <div class="container">
+                <div class="row">
+                    <!-- post -->
+                    {% for object in object_list %}
+                    <div class="post col-xl-6">
+                        <div class="post-thumbnail"><a href="post.html"><img style="max-height: 200px;" height="30px"
+                                    src="{{ object.image.url}}" alt="..." class="img-fluid"></a></div>
+                        <div class="post-details">
+                            <div class="post-meta d-flex justify-content-between">
+                                <div class="date meta-last">{{object.created|date:"d M | Y"}}</div>
+                                <div class="category">
+                                    <a href="#">{{object.category}}</a>
+                                </div>
+                            </div><a href="post.html">
+                                <h3 class="h4">{{object.title}}</h3>
+                            </a>
+                            <p class="text-muted">{{ object.content|truncatewords:"15"}}</p>
+                            <div class="post-footer d-flex align-items-center"><a href="#"
+                                    class="author d-flex align-items-center flex-wrap">
+                                    <div class="avatar"><img src="{{ object.user.profile_picture.url }}" alt="..."
+                                            class="img-fluid"></div>
+                                    <div class="title"><span>{{ object.user }}</span></div>
+                                </a>
+                                <div class="date"><i class="icon-clock"></i> 2 months ago</div>
+                                <div class="comments meta-last"><i class="icon-comment"></i>12</div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                </div>
+
+                {% if is_paginated %}
+                    {% include 'posts/snippets/pagination.html' with page_obj=page_obj %}
+                {% endif %}
+
+            </div>
+        </main>
+        <aside class="col-lg-4">
+
+            {% include 'posts/snippets/search.html' %}
+            {% include 'posts/snippets/latest_post.html'%}
+            {% include 'posts/snippets/category.html'%}
+            {% include 'posts/snippets/tags.html'%}
+        </aside>
+    </div>
+</div>
+
+{% endblock %}

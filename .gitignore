@@ -1,0 +1,5 @@
+__pycache__
+static/
+static_root/
+media/
+*sqlite3
