@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Post, Gallery
+from .models import Post, Gallery, Comment
 
 class PostAdmin(admin.ModelAdmin):
 
@@ -16,4 +16,5 @@ class PostAdmin(admin.ModelAdmin):
     list_per_page = 15
 
 admin.site.register(Post, PostAdmin)
+admin.site.register(Comment)
 admin.site.register(Gallery)

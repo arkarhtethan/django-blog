@@ -3,9 +3,13 @@
     <header>
         <h3 class="h6">Search the blog</h3>
     </header>
-    <form action="#" class="search-form">
+    <form action="{% url 'posts:search' %}" method="GET" class="search-form">
         <div class="form-group">
-            <input type="search" placeholder="What are you looking for?">
+            <input type="search" name="q" placeholder="What are you looking for?"
+            {% if request.GET.q %}  
+                value="{{ request.GET.q }}"
+            {% endif %}
+            >
             <button type="submit" class="submit"><i class="icon-search"></i></button>
         </div>
     </form>

@@ -6,6 +6,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from utils.unique_slug_field import unique_slug_generator
 
+
 class Post(models.Model):
 
     user = models.ForeignKey(BlogUser, on_delete=models.CASCADE)
@@ -38,8 +39,23 @@ class Post(models.Model):
 
         return self.title
 
-class Gallery(models.Model):
+class Comment(models.Model):
 
+    name = models.CharField(max_length=120)
+
+    email = models.EmailField()
+
+    text = models.TextField()
+
+    created = models.DateTimeField(auto_now_add=True)
+
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, null=True, blank=True)
+
+    def __str__(self):
+        return self.text
+
+class Gallery(models.Model):
+    
     image = models.ImageField(upload_to="gallery/")
 
     class Meta:
