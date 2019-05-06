@@ -7,7 +7,9 @@
         <main class="post blog-post col-lg-8">
             <div class="container">
                 <div class="post-single">
+                    {% if object.image %}
                     <div class="post-thumbnail"><img src="{{ object.image.url}}" alt="..." class="img-fluid"></div>
+                    {% endif %}
                     <div class="post-details">
                         <div class="post-meta d-flex justify-content-between">
                             <div class="category"><a href="#">{{ object.category }}</a></div>
@@ -15,18 +17,21 @@
                         <h1>{{ object.title }}<a href="#"><i class="fa fa-bookmark-o"></i></a></h1>
                         <div class="post-footer d-flex align-items-center flex-column flex-sm-row"><a href="#"
                                 class="author d-flex align-items-center flex-wrap">
+                                {% if object.user.profile_picture %}
                                 <div class="avatar"><img src="{{ object.user.profile_picture.url }}" alt="..."
                                         class="img-fluid"></div>
-                                <div class="title"><span>{{ object.user }}</span></div>
+                                {% endif %}
+                                <div class="title"><span>{{ object.user.name }}</span></div>
                             </a>
                             <div class="d-flex align-items-center flex-wrap">
                                 <div class="date"><i class="icon-clock"></i> {{ object.created|timesince }}</div>
                                 <div class="views"><i class="icon-eye"></i> 500</div>
-                                <div class="comments meta-last"><i class="icon-comment"></i>{{ post.comment_set.count}}</div>
+                                <div class="comments meta-last"><i class="icon-comment"></i>{{ post.comment_set.count}}
+                                </div>
                             </div>
                         </div>
                         <div class="post-body">
-                            <p> {{ object.content }} </p>
+                            <p> {{ object.content|safe }} </p>
                         </div>
                         <div class="post-tags">
                             {% for tag in object.tag.all %}
@@ -48,8 +53,8 @@
                             </a></div>
                         <div class="post-comments">
                             <header>
-                                <h3 class="h6">Post Comments<span
-                                        class="no-of-comments"> ({{ post.comment_set.count}})</span></h3>
+                                <h3 class="h6">Post Comments<span class="no-of-comments">
+                                        ({{ post.comment_set.count}})</span></h3>
                             </header>
 
                             {% for comment in object.comment_set.all %}
@@ -58,7 +63,8 @@
                                     <div class="user d-flex align-items-center">
                                         <div class="image"><img src="img/user.svg" alt="..."
                                                 class="img-fluid rounded-circle"></div>
-                                        <div class="title"><strong>{{ comment.name }}</strong><span class="date">{{ comment.created|date:"M d"}} </span></div>
+                                        <div class="title"><strong>{{ comment.name }}</strong><span
+                                                class="date">{{ comment.created|date:"M d"}} </span></div>
                                     </div>
                                 </div>
                                 <div class="comment-body">

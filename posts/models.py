@@ -5,16 +5,17 @@ from tags.models import Tag
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from utils.unique_slug_field import unique_slug_generator
-
+from ckeditor_uploader.fields import RichTextUploadingField
 
 class Post(models.Model):
 
-    user = models.ForeignKey(BlogUser, on_delete=models.CASCADE)
+    author = models.CharField(max_length=120)
 
     title = models.CharField(max_length=255)
 
     content = models.TextField()
-
+    # content = RichTextUploadingField()
+    
     created = models.DateTimeField(auto_now_add=True)
 
     updated_at = models.DateTimeField(auto_now=True)
@@ -30,6 +31,8 @@ class Post(models.Model):
     show_in_sample = models.BooleanField(default=False)
 
     featured = models.BooleanField(default=False)
+
+    published = models.BooleanField(default=False)
 
     class Meta:
 

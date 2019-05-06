@@ -8,7 +8,9 @@
 
         <a href="{% url 'posts:post-detail' slug=post.slug %}">
             <div class="item d-flex align-items-center">
+                {% if post.image %}
                 <div class="image"><img src="{{ post.image.url }}" alt="..." class="img-fluid"></div>
+                {% endif %}
                 <div class="title"><strong>{{post.title}}</strong>
                     <div class="d-flex align-items-center">
                         <div class="views"><i class="icon-eye"></i> 500</div>

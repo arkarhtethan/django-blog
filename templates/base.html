@@ -40,9 +40,9 @@
                     <div class="close-btn"><i class="icon-close"></i></div>
                     <div class="row d-flex justify-content-center">
                         <div class="col-md-8">
-                            <form action="#">
+                            <form action="{% url 'posts:search' %}">
                                 <div class="form-group">
-                                    <input type="search" name="search" id="search"
+                                    <input type="search" name="q" id="search"
                                         placeholder="What are you looking for?">
                                     <button type="submit" class="submit"><i class="icon-search-1"></i></button>
                                 </div>
@@ -65,11 +65,12 @@
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item"><a href="{% url 'posts:post-index' %}" class="nav-link active ">Home</a>
                         </li>
-                        <li class="nav-item"><a href="{% url 'posts:post-list' %}" class="nav-link ">Blog</a>
+                        
+                        <li class="nav-item"><a href="{% url 'posts:blog-post-list' %}" class="nav-link ">Blog</a>
                         </li>
                         <li class="nav-item"><a href="#" class="nav-link ">Contact</a>
                         </li>
-                        <li class="nav-item"><a href="blog.html" class="nav-link ">Admin</a>
+                        <li class="nav-item"><a href="{% url 'posts:blog-admin' %}" class="nav-link ">Admin</a>
                         </li>
                     </ul>
                     <div class="navbar-text"><a href="#" class="search-btn"><i class="icon-search-1"></i></a></div>
@@ -123,9 +124,11 @@
                         
                             <a href="#">
                                     <div class="post d-flex align-items-center">
+                                        {% if object.image.url %}
                                         <div class="image"><img src="{{ object.image.url }}" alt="..."
                                                 class="img-fluid">
                                         </div>
+                                        {% endif %}
                                         <div class="title"><strong>{{ object.title }}</strong><span
                                                 class="date last-meta">{{object.created|date:"M d, Y"}}</span></div>
                                     </div>

@@ -21,15 +21,17 @@
                     {% endif %}
                     {% for object in object_list %}
                     <div class="post col-xl-6">
-                        <div class="post-thumbnail"><a href="post.html"><img style="max-height: 200px;" height="30px"
+                        {% if object.image %}
+                        <div class="post-thumbnail"><a href="{% url 'posts:post-detail' slug=object.slug %}"><img style="max-height: 200px;" height="30px"
                                     src="{{ object.image.url}}" alt="..." class="img-fluid"></a></div>
+                        {% endif %}
                         <div class="post-details">
                             <div class="post-meta d-flex justify-content-between">
                                 <div class="date meta-last">{{object.created|date:"d M | Y"}}</div>
                                 <div class="category">
                                     <a href="#">{{object.category}}</a>
                                 </div>
-                            </div><a href="post.html">
+                            </div><a href="{% url 'posts:post-detail' slug=object.slug %}">
                                 <h3 class="h4">{{object.title}}</h3>
                             </a>
                             <p class="text-muted">{{ object.content|truncatewords:"15"}}</p>

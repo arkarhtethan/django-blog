@@ -37,16 +37,25 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     ########################################################
+    
     'debug_toolbar',
     'rest_framework',
     'rest_framework.authtoken',
+    'crispy_forms',
+    
     ########################################################
+    
     'category',
     'posts',
     'tags',
     'newsletter',
     'users',
+    'blog_admin',
+    'ckeditor',
+    'ckeditor_uploader',
+
 ]
 
 MIDDLEWARE = [
@@ -80,6 +89,8 @@ TEMPLATES = [
                 'posts.context_processor.latest_posts',
                 'posts.context_processor.categories',
                 'posts.context_processor.tags',
+                'posts.context_processor.posts_count',
+                'posts.context_processor.users_count',
             ],
         },
     },
@@ -168,3 +179,9 @@ DEBUG_TOOLBAR_PANELS = [
 DEBUG_TOOLBAR_CONFIG = {
     'INTERCEPT_REDIRECTS': False,
 }
+
+# crispy
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+# ckeditor
+CKEDITOR_UPLOAD_PATH = 'uploads/'
